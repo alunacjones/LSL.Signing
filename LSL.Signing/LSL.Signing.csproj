@@ -7,6 +7,7 @@
     <PackageTags>signing;object;sign;hash</PackageTags>
     <PackageDescription>Simple wrapper for obtaining a signature for an object</PackageDescription>
     <RepositoryUrl>https://github.com/alunacjones/LSL.Signing</RepositoryUrl>
+    <Authors>alunacjones</Authors>
   </PropertyGroup>
 
 </Project>

@@ -2,7 +2,7 @@ using System;
 
 namespace LSL.Signing
 {
-    public class ObjectSignerBuilder
+    public sealed class ObjectSignerBuilder
     {
         internal Func<byte[], byte[]> SignatureProvider { get; private set; }
         internal Func<object, byte[]> Serialiser { get; private set; }
