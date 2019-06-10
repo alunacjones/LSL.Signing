@@ -29,7 +29,7 @@ namespace LSL.Signing.Tests
             objectSigner.Verify(
                 validAndInvalidPair.Valid(),
                 signature
-            ).Should().BeTrue("the same object should produce the same signaure");
+            ).Should().BeTrue("the same object should produce the same signature");
 
             objectSigner.Verify(
                 validAndInvalidPair.Invalid(),
