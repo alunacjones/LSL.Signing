@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace LSL.Signing
 {
@@ -34,7 +35,7 @@ namespace LSL.Signing
 
         private byte[] DefaultSignatureProvider(byte[] arg)
         {
-            return new SHA256Managed().ComputeHash(arg);
+            return new HMACSHA256(Encoding.UTF8.GetBytes("asdhjkl%6782364$*(!@;")).ComputeHash(arg);
         }
     }
 }
