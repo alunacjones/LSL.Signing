@@ -55,7 +55,8 @@ namespace LSL.Signing.Tests
                 from signer in new[] {
                     Signer("HMAC256", cfg => cfg.WithHmac256SignatureProvider(secret)),
                     Signer("HMAC384", cfg => cfg.WithHmac384SignatureProvider(secret)),
-                    Signer("HMAC512", cfg => cfg.WithHmac512SignatureProvider(secret))
+                    Signer("HMAC512", cfg => cfg.WithHmac512SignatureProvider(secret)),
+                    Signer("Default", cfg => {})
                 }
                 from validAndInvalidPair in new Pair[] {
                     new Pair(() => new Test { Id = 12, Name = "Als" }, () => new Test { Id = 13, Name = "Als"}),
