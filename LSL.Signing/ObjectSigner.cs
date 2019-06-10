@@ -8,6 +8,8 @@ namespace LSL.Signing
 {
     internal class ObjectSigner : IObjectSigner
     {
+        private static HMACSHA256 DefaultSigner = new HMACSHA256(Encoding.UTF8.GetBytes("asdhjkl%6782-yaba-dabah-doo-364$*(!@;"));
+
         private ObjectSignerBuilder _builder;
 
         public ObjectSigner(ObjectSignerBuilder builder)
@@ -35,7 +37,7 @@ namespace LSL.Signing
 
         private byte[] DefaultSignatureProvider(byte[] arg)
         {
-            return new HMACSHA256(Encoding.UTF8.GetBytes("asdhjkl%6782364$*(!@;")).ComputeHash(arg);
+            return DefaultSigner.ComputeHash(arg);
         }
     }
 }
