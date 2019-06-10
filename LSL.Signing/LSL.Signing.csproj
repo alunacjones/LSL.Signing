@@ -4,6 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Version>1.0.1</Version>
     <PackageVersion>1.0.1</PackageVersion>
+    <PackageTags>signing;object;sign;hash</PackageTags>
+    <PackageDescription>Simple wrapper for obtaining a signature for an object</PackageDescription>
+    <RepositoryUrl>https://github.com/alunacjones/LSL.Signing</RepositoryUrl>
   </PropertyGroup>
 
 </Project>
