@@ -8,9 +8,9 @@ namespace LSL.Signing
 {
     internal class ObjectSigner : IObjectSigner
     {
-        private static HMACSHA256 DefaultSigner = new HMACSHA256(Encoding.UTF8.GetBytes("asdhjkl%6782-yaba-dabah-doo-364$*(!@;"));
+        private static readonly HMACSHA256 DefaultSigner = new HMACSHA256(Encoding.UTF8.GetBytes("asdhjkl%6782-yaba-dabah-doo-364$*(!@;"));
 
-        private ObjectSignerBuilder _builder;
+        private readonly ObjectSignerBuilder _builder;
 
         public ObjectSigner(ObjectSignerBuilder builder)
         {

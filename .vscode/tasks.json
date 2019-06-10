@@ -15,6 +15,23 @@
                 "reveal": "silent"
             },
             "problemMatcher": "$msCompile"
-        }
+        },
+        {
+            "label": "test",
+            "command": "dotnet",
+            "type": "process",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "args": [
+                "test",
+                "${workspaceFolder}/LSL.Signing.Tests/LSL.Signing.Tests.csproj",
+                "/p:CollectCoverage=true",
+                "/p:CoverletOutputFormat=\"opencover,lcov\"",
+                "/p:CoverletOutput=../lcov"
+            ],
+            "problemMatcher": "$msCompile"
+        },        
     ]
 }
