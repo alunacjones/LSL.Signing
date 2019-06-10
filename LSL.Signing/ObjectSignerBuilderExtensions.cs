@@ -23,13 +23,6 @@ namespace LSL.Signing
             source.WithSignatureProvider(new HMACSHA512(secret).ComputeHash);
             return source;
         }
-        
-        public static ObjectSignerBuilder WithRsa(this ObjectSignerBuilder source) 
-        {
-            var rsaProvider = new RSACryptoServiceProvider();
-            source.WithSignatureProvider(input => rsaProvider.SignData(input, 0, input.Length, null));
-            return source;
-        }
 
         public static ObjectSignerBuilder WithStringBasedSerialiser(this ObjectSignerBuilder source, Func<object, string> objectToStringSerialiser) 
         {
