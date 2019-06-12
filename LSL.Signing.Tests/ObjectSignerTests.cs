@@ -26,7 +26,8 @@ namespace LSL.Signing.Tests
 
             var signature = objectSigner.GenerateSignature(validAndInvalidPair.Valid());
 
-            signature.Length.Should().Be(expectedSignaureLength, "the signer shoulld prduce consistently lengthed signaures");
+            signature.Length.Should().Be(expectedSignaureLength, "the signer should prduce consistently lengthed signatures");
+
             objectSigner.Verify(
                 validAndInvalidPair.Valid(),
                 signature
