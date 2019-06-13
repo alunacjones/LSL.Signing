@@ -1,6 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/rh7je3wmpyojcgj6?svg=true)](https://ci.appveyor.com/project/alunacjones/lsl-signing)
-
-
+[![Build status](https://ci.appveyor.com/api/projects/status/9i2as11ge6ecash8?svg=true)](https://ci.appveyor.com/project/alunacjones/lsl-signing)
 
 # LSL.Signing
 
