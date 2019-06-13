@@ -50,7 +50,10 @@ var signature = new ObjectSignerFactory()
 Once we have a signature we can then verify an object using the `Verify` extension method:
 
 ```csharp
-bool Verify(this IObjectSigner source, object signaturee, byte[] expectedSignature)
+bool Verify(
+    this IObjectSigner source, 
+    object signaturee, 
+    byte[] expectedSignature)
 ```
 
 Example:
@@ -84,13 +87,15 @@ var signer = new ObjectSignerFactory().Build();
 Passing a delegate into the `Build` method allows for customisation of the signer's behaviour. The configuration object exposes the `WithBinarySerialiser` method to customise serlisation. It is defined as:
 
 ```csharp
-ObjectSignerBuilder WithBinarySerialiser(Func<object, byte[]> serialiser)
+ObjectSignerBuilder WithBinarySerialiser(
+    Func<object, byte[]> serialiser)
 ```
 
 Example:
 
 ```csharp
-// The following code relies on the installation of the MessagePack nuget library (https://www.nuget.org/packages/MessagePack/)
+// The following code relies on the installation of the MessagePack nuget library 
+//(https://www.nuget.org/packages/MessagePack/)
 var signer = new ObjectSignerFactory()
     .Build(cfg => cfg.WithBinarySerialiser(MessagePackSerializer.Serialize));
 ```
@@ -100,13 +105,16 @@ var signer = new ObjectSignerFactory()
 The configuration object has an extension that allows us to customise serialisation to a string instead of a byte array. The method is defined as:
 
 ```csharp
-ObjectSignerBuilder WithStringBasedSerialiser(this ObjectSignerBuilder source, Func<object, string> objectToStringSerialiser)
+ObjectSignerBuilder WithStringBasedSerialiser(
+    this ObjectSignerBuilder source, 
+    Func<object, string> objectToStringSerialiser)
 ```
 
 Example:
 
 ```csharp
-// This code snippet depends on the NetwonSoft.JSON nuget package for serialisation to a string (https://www.nuget.org/packages/Newtonsoft.Json/)
+// This code snippet depends on the NetwonSoft.JSON nuget package for serialisation to a string 
+//(https://www.nuget.org/packages/Newtonsoft.Json/)
 var signer = new ObjectSignerFactory()
     .Build(cfg => cfg.WithStringBasedSerialiser(JsonConvert.SerializeObject));
 ```
@@ -116,7 +124,8 @@ var signer = new ObjectSignerFactory()
 As with serialisation, we can provide a custom signer via the signer configuration method `WithSignatureProvider`:
 
 ```csharp
-ObjectSignerBuilder WithSignatureProvider(Func<byte[], byte[]> signatureProvider)
+ObjectSignerBuilder WithSignatureProvider(
+    Func<byte[], byte[]> signatureProvider)
 ```
 
 The following example uses a `HMACSHA512` instance with a secret of `[1,2,3]` to for signature generation.
@@ -135,7 +144,9 @@ Shortcut extensions are provided to quickly configure different sized HMAC insta
 Definition:
 
 ```csharp
-ObjectSignerBuilder WithHmac256SignatureProvider(this ObjectSignerBuilder source, byte[] secret)
+ObjectSignerBuilder WithHmac256SignatureProvider(
+    this ObjectSignerBuilder source, 
+    byte[] secret)
 ```
 
 Example:
@@ -150,7 +161,9 @@ var signer = new ObjectSignerFactory()
 Definition:
 
 ```csharp
-ObjectSignerBuilder WithHmac384SignatureProvider(this ObjectSignerBuilder source, byte[] secret)
+ObjectSignerBuilder WithHmac384SignatureProvider(
+    this ObjectSignerBuilder source, 
+    byte[] secret)
 ```
 
 Example:
@@ -165,7 +178,9 @@ var signer = new ObjectSignerFactory()
 Definition:
 
 ```csharp
-ObjectSignerBuilder WithHmac512SignatureProvider(this ObjectSignerBuilder source, byte[] secret)
+ObjectSignerBuilder WithHmac512SignatureProvider(
+    this ObjectSignerBuilder source, 
+    byte[] secret)
 ```
 
 Example:
