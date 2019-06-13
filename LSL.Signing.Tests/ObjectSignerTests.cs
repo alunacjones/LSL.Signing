@@ -69,7 +69,8 @@ namespace LSL.Signing.Tests
                 from validAndInvalidPair in new Pair[] {
                     new Pair(() => new Test { Id = 12, Name = "Als" }, () => new Test { Id = 13, Name = "Als"}),
                     new Pair(() => "qwe", () => "qwe2"),
-                    new Pair(() => new OuterClass { Id = 12, Inner = new Test { Id = 13, Name = "Als" }}, () => new OuterClass { Id = 12, Inner = new Test { Id = 14, Name = "Als" }})
+                    new Pair(() => new OuterClass { Id = 12, Inner = new Test { Id = 13, Name = "Als" }}, () => new OuterClass { Id = 12, Inner = new Test { Id = 14, Name = "Als" }}),
+                    new Pair(() => 12m, () => 12.00m)
                 }
                 let valid = JsonConvert.SerializeObject(validAndInvalidPair.Valid())
                 let invalid = JsonConvert.SerializeObject(validAndInvalidPair.Invalid())
