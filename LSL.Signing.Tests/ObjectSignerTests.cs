@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Text;
 using FluentAssertions;
 using MessagePack;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using System.Security.Cryptography;
+using static LSL.Signing.Tests.ObjectSignerTestHelper;
 
 namespace LSL.Signing.Tests
 {
     public class ObjectSignerTests
     {
         [TestCaseSource(nameof(Tests))]
-        public void RunTests(Action<ObjectSignerBuilder> binarySerialiserBuilder, Action<ObjectSignerBuilder> signerBuilder, Pair validAndInvalidPair, int expectedSignaureLength)
+        public void RunTests(Action<ObjectSignerBuilder> binarySerialiserBuilder, Action<ObjectSignerBuilder> signerBuilder, PairInfo validAndInvalidPair, int expectedSignaureLength)
         {
             MessagePackSerializer.SetDefaultResolver(MessagePack.Resolvers.ContractlessStandardResolver.Instance);
 
@@ -66,52 +65,17 @@ namespace LSL.Signing.Tests
                     Signer("HMAC512", 64, cfg => cfg.WithHmac512SignatureProvider(secret)),
                     Signer("Default", 32, cfg => {})
                 }
-                from validAndInvalidPair in new Pair[] {
-                    new Pair(() => new Test { Id = 12, Name = "Als" }, () => new Test { Id = 13, Name = "Als"}),
-                    new Pair(() => "qwe", () => "qwe2"),
-                    new Pair(() => new OuterClass { Id = 12, Inner = new Test { Id = 13, Name = "Als" }}, () => new OuterClass { Id = 12, Inner = new Test { Id = 14, Name = "Als" }}),
-                    new Pair(() => 12m, () => 12.00m)
+                from validAndInvalidPair in new[] {
+                    Pair(() => new Test { Id = 12, Name = "Als" }, () => new Test { Id = 13, Name = "Als"}),
+                    Pair(() => "qwe", () => "qwe2"),
+                    Pair(() => new OuterClass { Id = 12, Inner = new Test { Id = 13, Name = "Als" }}, () => new OuterClass { Id = 12, Inner = new Test { Id = 14, Name = "Als" }}),
+                    Pair(() => 12m, () => 12.00m)
                 }
                 let valid = JsonConvert.SerializeObject(validAndInvalidPair.Valid())
                 let invalid = JsonConvert.SerializeObject(validAndInvalidPair.Invalid())
                 select new TestCaseData(binarySerialiser.Serialiser, signer.SignerBuilder, validAndInvalidPair, signer.ExpectedSignatureLength)
                     .SetName($"Given a {binarySerialiser.Name} serialiser and a {signer.Name} signer for a valid value of {valid} and invalid value of {invalid}, it should validate both correctly");
             }
-        }
-
-        public static SignerInfo Signer(string name, int expectedSignatureLength, Action<ObjectSignerBuilder> signerBuilder) => new SignerInfo
-        {
-            Name = name,
-            SignerBuilder = signerBuilder,
-            ExpectedSignatureLength = expectedSignatureLength
-        };
-
-        public static SerialiserInfo Serialiser(string name, Action<ObjectSignerBuilder> serialiserBuilder) => new SerialiserInfo
-        {
-            Name = name,
-            Serialiser = serialiserBuilder
-        };
-
-        public class SignerInfo {
-            public string Name {get;set;}
-            public Action<ObjectSignerBuilder> SignerBuilder {get;set;}
-            public int ExpectedSignatureLength { get; internal set; }
-        }
-
-        public class SerialiserInfo {            
-            public string Name {get;set;}
-            public Action<ObjectSignerBuilder> Serialiser {get;set;}
-        }
-
-        public class Pair {
-            public Pair(Func<object> valid, Func<object> invalid)
-            {
-                Valid = valid;
-                Invalid = invalid;
-            }
-
-            public Func<object> Valid { get; }
-            public Func<object> Invalid { get; }
         }
     }
 }
