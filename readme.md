@@ -23,11 +23,13 @@ The previous example uses a primitive type but complex objects can also be signe
 /*
     This example relies on the definition of two classes:
 
+    [Serializable]
     public class Test {
         public int Id { get; set; }
         public Inner InnerInstance { get; set; }
     }
 
+    [Serializable]
     public class Inner {
         public int OtherId { get; set; }
         public string Name { get; set; }
