@@ -9,6 +9,12 @@ This library provides a simple wrapper to quickly generate a signature for an ob
 
 ### Signing objects
 
+The following examples use the `GenerateSignature` method that is defined as:
+
+```csharp
+byte[] GenerateSignature(object source)
+```
+
 Using the default options a signature can be obtained with the following:
 
 ```csharp
