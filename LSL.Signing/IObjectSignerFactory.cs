@@ -10,7 +10,7 @@ namespace LSL.Signing
         /// <summary>
         /// Builds a new <see cref="IObjectSigner"/> instance with an optional builder
         /// </summary>
-        /// <param name="builder">A delegate that is provided an ObjectSignerBuilder for configuring the <see cref="IObjectSigner"/> instance</param>
+        /// <param name="builder">A delegate that is provided an <see cref="ObjectSignerBuilder"/> for configuring the <see cref="IObjectSigner"/> instance</param>
         /// <returns></returns>
         IObjectSigner Build(Action<ObjectSignerBuilder> builder = null);
     }

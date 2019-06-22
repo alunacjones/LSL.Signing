@@ -35,7 +35,7 @@ namespace LSL.Signing
         }
 
         /// <summary>
-        /// Registers and action to call on disposal of the <see cref="IObjectSigner"/>
+        /// Registers an action to call on disposal of the <see cref="IObjectSigner"/>
         /// </summary>
         /// <param name="toExecuteOnDispose">The action to execute on disposal</param>
         /// <returns>The original <see cref="ObjectSignerBuilder"/></returns>
