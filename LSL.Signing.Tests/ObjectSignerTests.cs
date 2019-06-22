@@ -18,24 +18,25 @@ namespace LSL.Signing.Tests
             MessagePackSerializer.SetDefaultResolver(MessagePack.Resolvers.ContractlessStandardResolver.Instance);
 
             var factory = new ObjectSignerFactory();
-            var objectSigner = factory.Build(cfg => {
+            using (var objectSigner = factory.Build(cfg => {
                 signerBuilder(cfg);
                 binarySerialiserBuilder(cfg);
-            });
+            }))
+            {
+                var signature = objectSigner.GenerateSignature(validAndInvalidPair.Valid());
 
-            var signature = objectSigner.GenerateSignature(validAndInvalidPair.Valid());
+                signature.Length.Should().Be(expectedSignaureLength, "the signer should prduce consistently lengthed signatures");
 
-            signature.Length.Should().Be(expectedSignaureLength, "the signer should prduce consistently lengthed signatures");
+                objectSigner.Verify(
+                    validAndInvalidPair.Valid(),
+                    signature
+                ).Should().BeTrue("the same object should produce the same signature");
 
-            objectSigner.Verify(
-                validAndInvalidPair.Valid(),
-                signature
-            ).Should().BeTrue("the same object should produce the same signature");
-
-            objectSigner.Verify(
-                validAndInvalidPair.Invalid(),
-                signature
-            ).Should().BeFalse("a different object should produce a different signature");
+                objectSigner.Verify(
+                    validAndInvalidPair.Invalid(),
+                    signature
+                ).Should().BeFalse("a different object should produce a different signature");
+            }
         }
 
         [Serializable]
