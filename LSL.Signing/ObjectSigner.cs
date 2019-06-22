@@ -6,6 +6,7 @@ using System.Text;
 
 namespace LSL.Signing
 {
+    /// <inheritdoc/>
     internal class ObjectSigner : IObjectSigner
     {
         private static readonly HMACSHA256 DefaultSigner = new HMACSHA256(Encoding.UTF8.GetBytes("asdhjkl%6782-yaba-dabah-doo-364$*(!@;"));
@@ -17,6 +18,7 @@ namespace LSL.Signing
             _builder = builder;
         }
 
+        /// <inheritdoc/>
         public byte[] GenerateSignature(object source)
         {
             return (_builder
