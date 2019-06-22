@@ -1,6 +1,9 @@
 version: 1.0.{build}
 image: Visual Studio 2017
 configuration: Release
+environment:
+  CODECOV_TOKEN:
+    secure: qLTLWGSiBSBNf9rKPeQUX1me41EhF4tJ3HLaxaMWo9tjaHlO829TeuLLtlr5dRad
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
