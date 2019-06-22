@@ -1,9 +1,11 @@
+using System;
+
 namespace LSL.Signing
 {
     /// <summary>
     /// Defines the operations that an <see cref="IObjectSigner"/> can perform
     /// </summary>
-    public interface IObjectSigner
+    public interface IObjectSigner : IDisposable
     {
         /// <summary>
         /// Generate a signature for the given object

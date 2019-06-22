@@ -9,6 +9,13 @@ namespace LSL.Signing
     /// </summary>
     public static class ObjectSignerBuilderExtensions 
     {        
+        private static ObjectSignerBuilder AddDisposableSignatureProvider(ObjectSignerBuilder source, HashAlgorithm algorithm)
+        {
+            return source
+                .WithSignatureProvider(algorithm.ComputeHash)
+                .OnDispose(() => algorithm.Dispose());
+        }
+
         /// <summary>
         /// Use the HMACSHA256 ComputeHash method for signature generation
         /// </summary>
@@ -17,8 +24,7 @@ namespace LSL.Signing
         /// <returns><see cref="ObjectSignerBuilder"/> instance to fluently build with</returns>
         public static ObjectSignerBuilder WithHmac256SignatureProvider(this ObjectSignerBuilder source, byte[] secret)
         {
-            source.WithSignatureProvider(new HMACSHA256(secret).ComputeHash);
-            return source;
+            return AddDisposableSignatureProvider(source, new HMACSHA256(secret));
         }
 
         /// <summary>
@@ -29,8 +35,7 @@ namespace LSL.Signing
         /// <returns><see cref="ObjectSignerBuilder"/> instance to fluently build with</returns>
         public static ObjectSignerBuilder WithHmac384SignatureProvider(this ObjectSignerBuilder source, byte[] secret)
         {
-            source.WithSignatureProvider(new HMACSHA384(secret).ComputeHash);
-            return source;
+            return AddDisposableSignatureProvider(source, new HMACSHA384(secret));
         }        
 
         /// <summary>
@@ -41,8 +46,7 @@ namespace LSL.Signing
         /// <returns><see cref="ObjectSignerBuilder"/> instance to fluently build with</returns>
         public static ObjectSignerBuilder WithHmac512SignatureProvider(this ObjectSignerBuilder source, byte[] secret)
         {
-            source.WithSignatureProvider(new HMACSHA512(secret).ComputeHash);
-            return source;
+            return AddDisposableSignatureProvider(source, new HMACSHA512(secret));
         }
 
         /// <summary>
