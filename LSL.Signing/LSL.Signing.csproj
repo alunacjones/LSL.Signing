@@ -11,4 +11,7 @@
     <Authors>alunacjones</Authors>
   </PropertyGroup>
 
+  <PropertyGroup>
+      <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
 </Project>
