@@ -23,7 +23,7 @@ namespace LSL.Signing
         public byte[] GenerateSignature(object source)
         {
             return (_builder
-                .SignatureProvider ?? DefaultSignatureProvider)(
+                .SignatureProvider ?? DefaultSigner.ComputeHash)(
                     (_builder.Serialiser ?? DefaultSerialiser)(source)
                 );
         }
@@ -58,11 +58,6 @@ namespace LSL.Signing
                 ms.Flush();
                 return ms.GetBuffer();
             }
-        }
-
-        private byte[] DefaultSignatureProvider(byte[] arg)
-        {
-            return DefaultSigner.ComputeHash(arg);
         }
     }
 }
