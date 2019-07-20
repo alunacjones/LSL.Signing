@@ -3,7 +3,7 @@ using System;
 namespace LSL.Signing
 {
     /// <summary>
-    /// Defines the operations that an <see cref="IObjectSigner"/> can perform
+    /// Defines the operations that an <see cref="IObjectSigner"/> can perform.
     /// </summary>
     public interface IObjectSigner : IDisposable
     {
