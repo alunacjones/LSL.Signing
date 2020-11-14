@@ -27,7 +27,7 @@ artifacts:
 deploy:
 - provider: NuGet
   api_key:
-    secure: zT5PjZloU9HIMGHOVi/1/Mn+HDbUZGHCJvIEAfxdJ1E7Qt17Bbje2MtklFErXmtc
+    secure: KvCsSP9GBIWOq9YWTpUK2iqjXeyMd/gv20zDXVHA5et7TR3nMHZKr0hcfsY5wt1N
 skip_commits:
   files:
     - '**/*.md'     
