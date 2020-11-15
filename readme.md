@@ -148,8 +148,10 @@ var signer = new ObjectSignerFactory()
 `IObjectSigner` is derived from `IDisposable`. As such you can register a dispose delegate for when the `IObjectSigner` is disposed.
 
 ```csharp
+var algorithm = new HMACSHA256(new[] { 1, 2, 3 });
 var signer = new ObjectSignerFactory()
-    .Build(cfg => cfg.WithSignatureProvider(new HMACSHA256(new[] { 1, 2, 3 })))
+    .Build(cfg => cfg
+        .WithSignatureProvider(algorithmn.ComputeHash)
         .OnDispose(() => algorithm.Dispose())
     );
 ```
