@@ -143,10 +143,21 @@ var signer = new ObjectSignerFactory()
     .Build(cfg => cfg.WithSignatureProvider(new HMACSHA512(new[] {1,2,3}).ComputeHash));
 ```
 
+### Registering a dispose method
+
+`IObjectSigner` is derived from `IDisposable`. As such you can register a dispose delegate for when the `IObjectSigner` is disposed.
+
+```csharp
+var signer = new ObjectSignerFactory()
+    .Build(cfg => cfg.WithSignatureProvider(new HMACSHA256(new[] { 1, 2, 3 })))
+        .OnDispose(() => algorithm.Dispose())
+    );
+```
 ### Signer extensions
 
 Shortcut extensions are provided to quickly configure different sized HMAC instances that a signer should use.
 
+> **WARNING**: All HMAC-prefixed extensions register delegates for disposing of the `HashAlgorithmn` and as such the `IObjectSigner` should be disposed when finished with.
 #### WithHmac256SignatureProvider
 
 Definition:
