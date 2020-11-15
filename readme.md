@@ -173,8 +173,12 @@ ObjectSignerBuilder WithHmac256SignatureProvider(
 Example:
 
 ```csharp
-var signer = new ObjectSignerFactory()
-    .Build(cfg => cfg.WithHmac256SignatureProvider(new[] {1,2,3}));
+using (var signer = new ObjectSignerFactory()
+    .Build(cfg => cfg.WithHmac256SignatureProvider(new[] {1,2,3}))) 
+{
+    // do stuff with your object signer
+}
+    
 ```
 
 #### WithHmac384SignatureProvider
@@ -190,8 +194,11 @@ ObjectSignerBuilder WithHmac384SignatureProvider(
 Example:
 
 ```csharp
-var signer = new ObjectSignerFactory()
-    .Build(cfg => cfg.WithHmac384SignatureProvider(new[] {1,2,3}));
+using (var signer = new ObjectSignerFactory()
+    .Build(cfg => cfg.WithHmac384SignatureProvider(new[] {1,2,3}))) 
+{
+    // do stuff with your signer
+}
 ```
 
 #### WithHmac512SignatureProvider
@@ -207,6 +214,9 @@ ObjectSignerBuilder WithHmac512SignatureProvider(
 Example:
 
 ```csharp
-var signer = new ObjectSignerFactory()
-    .Build(cfg => cfg.WithHmac512SignatureProvider(new[] {1,2,3}));
+using (var signer = new ObjectSignerFactory()
+    .Build(cfg => cfg.WithHmac512SignatureProvider(new[] {1,2,3}))) 
+{
+    // do stuff with your signer
+}
 ```
