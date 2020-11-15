@@ -75,7 +75,7 @@ namespace LSL.Signing.Tests
                 let valid = JsonConvert.SerializeObject(validAndInvalidPair.Valid())
                 let invalid = JsonConvert.SerializeObject(validAndInvalidPair.Invalid())
                 select new TestCaseData(binarySerialiser.Serialiser, signer.SignerBuilder, validAndInvalidPair, signer.ExpectedSignatureLength)
-                    .SetName($"Given a {binarySerialiser.Name} serialiser and a {signer.Name} signer for a valid value of {valid} and invalid value of {invalid}, it should validate both correctly");
+                    .SetName($"Given a {binarySerialiser.Name} serialiser and a {signer.Name} signer for a valid value of {valid} and invalid value of {invalid}, it should validate both correctly".Replace(".", "․"));
             }
         }
     }
