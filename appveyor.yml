@@ -4,6 +4,14 @@ configuration: Release
 environment:
   CODECOV_TOKEN:
     secure: qLTLWGSiBSBNf9rKPeQUX1me41EhF4tJ3HLaxaMWo9tjaHlO829TeuLLtlr5dRad
+  keyfile_salt:
+    secure: 7MQg/ApVF+pQ6BH9mIygmZZXYylcKrYU0MDPVhFKq/3lwqrD07yBFDjWnX90WEFDMVPrMKuC2ljPCTsgwlhtnQ==
+  keyfile_secret:
+    secure: 8dwhU0D9ziN3eO21jNuk7XFRU9SpDv8laszr+gCTiwxJx/XmaHGtLn8meL5BIZFV
+install:
+  - ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
+  - cmd: appveyor-tools\secure-file -decrypt LSL.Signing\LSL.snk.enc -secret %keyfile_secret% -salt %keyfile_salt%
+  - sh: ./appveyor-tools/secure-file -decrypt LSL.Signing/LSL.snk.enc -secret $keyfile_secret -salt $keyfile_salt
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
